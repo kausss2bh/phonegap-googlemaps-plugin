@@ -1,0 +1,13 @@
+<h1>Page 2</h1>
+<div id="map_canvas"></div>
+<script type="text/javascript">
+var map;
+$(document).one("pageLoad", function() {
+  map = plugin.google.maps.Map.getMap($("#map_canvas")[0]);
+});
+$(document).one("pageLeave", function() {
+  map.remove();
+  map = null;
+});
+  
+</script>

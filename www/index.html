@@ -5,49 +5,38 @@
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <title>Google Maps Plugin for Cordova</title>
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.4.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link href="css/prettify.css" type="text/css" rel="stylesheet" />
     <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile-1.4.4.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript">
-    $(document).on('deviceready', function() {
-      var map = plugin.google.maps.Map.getMap($("#map_canvas")[0]);
-      
-      $("#testBtn").click(function() {
-        map.getMyLocation({
-          'enableHighAccuracy': true
-        }, function(location) {
-          map.addMarker({
-            'position': location.latLng
-          });
-          
-          map.animateCamera({
-            'target': location.latLng,
-            'zoom': 16,
-            'tilt': 90
-          });
-        });
-      });
-    });
-    </script>
-    <style type="text/css">
-      button {
-        margin: 20px;
-      }
-      html, body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map_canvas {
-        margin: 5%;
-        width: 90%;
-        height: 90%;
-      }
-    </style>
+    <script type="text/javascript" src="js/example.js"></script>
+    <script src="js/prettify.js"></script>
   </head>
   <body>
-    <div id="map_canvas" >
-      <button id="testBtn">getMyLocation()</button>
-    </div>
+    <div data-role="page">
+    
+      <header data-role="header"> 
+        <h1 class="ui-title" role="heading">issue 260 test</h1>
+        <div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+         <a href="#menulist" data-role="button" data-icon="bullets">menu</a>
+        </div>
+      </header><!-- /header -->
+    
+      <div role="main" class="ui-content jqm-content">
+        <div id='container'></div>
+      </div><!-- /content -->
+    
+    
+      <div data-role="panel" id="menulist" data-position="left" data-display="overlay">
+        <ul data-role="listview">
+          <li action="test_page1">Test1</li>
+          <li action="test_page2">Test2</li>
+          <li action="test_page3">Test3</li>
+        </ul>
+      </div><!-- /menu panel -->
+    
+    </div><!-- /page -->
   </body>
 </html>

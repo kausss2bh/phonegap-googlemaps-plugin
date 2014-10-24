@@ -19,20 +19,14 @@ window.onerror = function(message, file, line) {
 /**
  * Start from here
  */
+var map = null;
 $(document).on("deviceready", function() {
-  var map = plugin.google.maps.Map.getMap();
   
   $("li[action]").click(function() {
     $("#menulist").panel("close");
     
-    // Map.clear() method removes all mark-ups, such as marker.
-    map.clear();
-    
-    // Map.off() method removes all event listeners.
-    map.off();
-    
     var action = $(this).attr("action");
-    loadPage(map, action);
+    loadPage(action);
   });
   
   /**
@@ -40,11 +34,15 @@ $(document).on("deviceready", function() {
    * In this case, you must call map.setClickable(false) to be able to click the side menu.
    */
   function onSideMenuClose() {
-    map.setClickable(true);
+    if (map) {
+      map.setClickable(true);
+    }
   }
   
   function onSideMenuOpen() {
-    map.setClickable(false);
+    if (map) {
+      map.setClickable(false);
+    }
   }
   
   $("#menulist").panel({
@@ -52,7 +50,7 @@ $(document).on("deviceready", function() {
     "open": onSideMenuOpen
   });
   
-  loadPage(map, "test");
+  loadPage("test_page1");
 });
 
 /**
@@ -60,30 +58,15 @@ $(document).on("deviceready", function() {
  * @param {Object} map
  * @param {String} pageName
  */
-function loadPage(map, pageName) {
-  $(document).trigger("pageLeave", map);
+function loadPage(pageName) {
+  $(document).trigger("pageLeave");
   $.get("./pages/" + pageName + ".html", function(html) {
+    $("#container").html("");
     $("#container").html(html);
     $.mobile.activePage.trigger("create");
     
-    // PrettyPrint
-    // @refer https://code.google.com/p/google-code-prettify/
-    if (typeof prettyPrint === "function") {
-      prettyPrint();
-    }
-    
-    map.clear();
-    map.off();
-    
-    // Embed a map into the div tag.
-    var div = $("#map_canvas")[0];
-    if (div) {
-      map.setDiv(div);
-    }
-    
-    // Execute the code
     setTimeout(function() {
-      $(document).trigger("pageLoad", map);
+      $(document).trigger("pageLoad");
     }, 1000);
   });
 }
