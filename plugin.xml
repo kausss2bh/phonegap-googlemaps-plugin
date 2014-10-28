@@ -22,7 +22,7 @@
     
     <!-- android -->
     <platform name="android">
-        <preference name="API_KEY_FOR_ANDROID" />
+        <preference name="AIzaSyC9YP1DPl1vRtNe5_ynGU3xWF43UZ3zHqQ" />
         
         <info>
              In order to run this plugin, you need to obtain Google Maps API key for Android.
